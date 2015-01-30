@@ -7,7 +7,7 @@ namespace YeahOrm;
  * 
  * @author David Cavar
  */
-class PdoAdapter implements \Yeah\Fw\Db\AdapterInterface {
+class PdoAdapter implements \YeahOrm\AdapterInterface {
 
     /**
      * Initializes database adapter

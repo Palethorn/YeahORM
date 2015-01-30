@@ -8,7 +8,7 @@ namespace YeahOrm;
  * 
  * @author David Cavar
  */
-class NullAdapter implements \Yeah\Fw\Db\AdapterInterface {
+class NullAdapter implements \YeahOrm\AdapterInterface {
 
     /**
      * 

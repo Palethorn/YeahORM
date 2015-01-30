@@ -9,37 +9,17 @@ namespace YeahOrm;
  */
 class PdoConnection extends \PDO {
 
-    private static $instance = null;
-    private static $dsn = null;
-    private static $username = null;
-    private static $password = null;
-
     /**
      * Creates PdoConnection object
      * 
      * @param mixed $options PdoConnection options
      */
-    public function __construct($options) {
-        parent::__construct(self::$dsn, self::$username, self::$password, array(
-            \PDO::ATTR_PERSISTENT => true,
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_EMULATE_PREPARES => false,
-            \PDO::ATTR_STRINGIFY_FETCHES => false
+    public function __construct(PdoDatabaseConfig $config) {
+        parent::__construct($config->getDsn(), $config->getUsername(), $config->getPassword(), array(
+            \PDO::ATTR_PERSISTENT => $config->getPersistent(),
+            \PDO::ATTR_ERRMODE => $config->getErrorMode(),
+            \PDO::ATTR_EMULATE_PREPARES => $config->getEmulatePrepares(),
+            \PDO::ATTR_STRINGIFY_FETCHES => $config->getStringifyFetches()
         ));
     }
-
-    /**
-     * Called from \Yeah\Fw\Db\PdoAdapter
-     * Sets global database options
-     * 
-     * @param string $dsn
-     * @param string $username
-     * @param string $password
-     */
-    public static function configure($dsn, $username, $password) {
-        self::$dsn = $dsn;
-        self::$username = $username;
-        self::$password = $password;
-    }
-
 }

@@ -40,9 +40,9 @@ abstract class PdoModel {
      * 
      * @param mixed $options PdoModel options
      */
-    public function __construct($options = null) {
-        $this->db_adapter = new PdoConnection(\Yeah\Fw\Application\Config::get('database'));
-        $this->schema = self::$schema[$this->table];
+    public function __construct(DatabaseConfig $config) {
+        $this->db_adapter = new PdoConnection($config);
+        $this->schema = $config->getSchema()[$this->table];
     }
 
     /**

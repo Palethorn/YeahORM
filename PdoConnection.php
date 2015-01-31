@@ -14,7 +14,7 @@ class PdoConnection extends \PDO {
      * 
      * @param mixed $options PdoConnection options
      */
-    public function __construct(PdoDatabaseConfig $config) {
+    public function __construct(\YeahOrm\DatabaseConfigInterface $config) {
         parent::__construct($config->getDsn(), $config->getUsername(), $config->getPassword(), array(
             \PDO::ATTR_PERSISTENT => $config->getPersistent(),
             \PDO::ATTR_ERRMODE => $config->getErrorMode(),

@@ -40,7 +40,7 @@ abstract class PdoModel {
      * 
      * @param mixed $options PdoModel options
      */
-    public function __construct(DatabaseConfig $config) {
+    public function __construct(\YeahOrm\DatabaseConfigInterface $config) {
         $this->db_adapter = new PdoConnection($config);
         $this->schema = $config->getSchema()[$this->table];
     }

@@ -2,7 +2,7 @@
 
 namespace YeahOrm;
 
-class DatabaseConfig {
+class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
 
     private $username = null;
     private $password = null;

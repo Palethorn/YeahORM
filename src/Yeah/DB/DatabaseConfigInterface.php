@@ -1,8 +1,7 @@
 <?php
 
-namespace YeahOrm;
+namespace Yeah\DB;
 
 interface DatabaseConfigInterface {
-    
-}
 
+}

@@ -1,20 +1,20 @@
 <?php
 
-namespace YeahOrm;
+namespace Yeah\DB\PDO;
 
 /**
  * PDO connection class
- * 
+ *
  * @author David Cavar
  */
-class PdoConnection extends \PDO {
+class Connection extends \PDO {
 
     /**
      * Creates PdoConnection object
-     * 
+     *
      * @param mixed $options PdoConnection options
      */
-    public function __construct(\YeahOrm\DatabaseConfigInterface $config) {
+    public function __construct(\Yeah\DB\DatabaseConfigInterface $config) {
         parent::__construct($config->getDsn(), $config->getUsername(), $config->getPassword(), array(
             \PDO::ATTR_PERSISTENT => $config->getPersistent(),
             \PDO::ATTR_ERRMODE => $config->getErrorMode(),

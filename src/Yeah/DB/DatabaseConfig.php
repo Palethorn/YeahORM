@@ -1,8 +1,8 @@
 <?php
 
-namespace YeahOrm;
+namespace Yeah\DB;
 
-class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
+class DatabaseConfig implements \Yeah\DB\DatabaseConfigInterface {
 
     private $username = null;
     private $password = null;
@@ -13,7 +13,7 @@ class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
     private $error_mode = 2;
     private $emulate_prepares = false;
     private $stringify_fetches = false;
-    private $schema = null;
+    private $schema_path = null;
 
     public function importFromFile($file) {
         $config = require_once $file;
@@ -21,6 +21,7 @@ class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
     }
 
     public function importFromArray($config) {
+        // var_dump($config); die();
         $this->username = $config['username'];
         $this->password = $config['password'];
         $this->host = $config['host'];
@@ -31,8 +32,23 @@ class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
         $this->error_mode = isset($config['error_mode']) ? $config['error_mode'] : \PDO::ERRMODE_EXCEPTION;
         $this->stringify_fetches = isset($config['stringify_fetches']) ? $config['stringify_fetches'] : false;
         $this->emulate_prepares = isset($config['emulate_prepares']) ? $config['emulate_prepares'] : false;
-        
-        $this->schema = require $config['schema_path'];
+
+        $this->schema_path = $config['schema_path'];
+    }
+
+    public function importFromObject($config) {
+        $this->username = $config->username;
+        $this->password = $config->password;
+        $this->host = $config->host;
+        $this->database = $config->database;
+        $this->charset = $config->charset;
+
+        $this->presistent = isset($config->presistent) ? $config->presistent : true;
+        $this->error_mode = isset($config->error_mode) ? $config->error_mode : \PDO::ERRMODE_EXCEPTION;
+        $this->stringify_fetches = isset($config->stringify_fetches) ? $config->stringify_fetches : false;
+        $this->emulate_prepares = isset($config->emulate_prepares) ? $config->emulate_prepares : false;
+
+        $this->schema_path = $config->schema_path;
     }
 
     public function getUsername() {
@@ -71,8 +87,12 @@ class DatabaseConfig implements \YeahOrm\DatabaseConfigInterface {
         return $this->stringify_fetches;
     }
 
-    public function getSchema() {
-        return $this->schema;
+    public function getSchemaPath() {
+        return $this->schema_path;
     }
-    
+
+    public function getSchema($table) {
+        return require $this->schema_path . DIRECTORY_SEPARATOR . $table . '.php';
+    }
+
 }

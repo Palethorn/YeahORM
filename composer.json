@@ -1,0 +1,15 @@
+{
+    "name": "palethorn/yeah-orm",
+    "license": "MIT",
+    "description": "ORM/DBAL designed to work with Yeah! PHP framework",
+    "type": "library",
+    "keywords": ["framework", "PHP", "yeah", "ORM", "DBAL"],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0",
+        "yeah/yeah-devtools": "master-dev"
+    },
+    "autoload": {
+        "psr-0": { "Yeah\\ORM\\": "src", "Yeah\\DBAL": "src", "Yeah\\DB": "src" }
+    }
+}

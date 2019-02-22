@@ -1,1 +1,5 @@
 /nbproject
+vendor/
+composer
+composer.lock
+examples

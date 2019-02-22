@@ -1,0 +1,16 @@
+class <?php echo $class_def['name']; ?> {
+<?php foreach($class_def['props'] as $name => $func) { ?>
+    private $<?php echo $name; ?>;
+<?php } ?>
+
+<?php foreach($class_def['props'] as $name => $func) { ?>
+    public function <?php echo $func['getter'] ?>() {
+        return $this-><?php echo $name; ?>;
+    }
+    
+    public function <?php echo $func['setter'] ?>($val) {
+        $this-><?php echo $name; ?> = $val;
+        return $this;
+    }
+<?php } ?>
+}

@@ -25,7 +25,8 @@ class ModelGenerator {
             }
 
             $class_def = array(
-                'name' => camelize($mapping['name']),
+                'namespace' => $mapping['namespace'], 
+                'name' => $mapping['class'],
                 'props' => array()
             );
 

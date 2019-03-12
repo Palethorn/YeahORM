@@ -2,4 +2,7 @@
 vendor/
 composer
 composer.lock
-examples
+src/Entity/
+examples/schema
+config/
+examples/

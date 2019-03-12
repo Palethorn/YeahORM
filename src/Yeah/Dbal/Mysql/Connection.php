@@ -1,8 +1,8 @@
 <?php
 namespace Yeah\Dbal\Mysql;
 
-class Connection extends \PDO {
-    public function __construct($host, $port, $dbname, $username, $password, $charset = 'utf8') {
+class Connection extends \PDO implements \Yeah\Dbal\Connection {
+    public function __construct($dbname, $username, $password, $host = '127.0.0.1', $port = 3306, $charset = 'utf8') {
         $conn_string  = sprintf('mysql:host=%s;port=%s;dbname=%s', $host, $port, $dbname);
 
         parent::__construct($conn_string, $username, $password, array(

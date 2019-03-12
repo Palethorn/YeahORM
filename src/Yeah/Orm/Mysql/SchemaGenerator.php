@@ -1,14 +1,15 @@
 <?php
-namespace Yeah\Dbal\Mysql;
+namespace Yeah\ORM\Mysql;
 
 class SchemaGenerator {
 
     private $schema_path;
     private $conn;
 
-    public function __construct($conn, $schema_path) {
+    public function __construct($conn, $schema_path, $namespace = '') {
         $this->conn = $conn;
         $this->schema_path = $schema_path;
+        $this->namespace = $namespace;
     }
 
     public function generate() {
@@ -38,6 +39,8 @@ class SchemaGenerator {
         
             $mapping = array(
                 'name' => $table,
+                'class' => \camelize($table),
+                'namespace' => $this->namespace,
                 'fields' => $field_mapping,
                 'indexes' => $index_mapping
             );

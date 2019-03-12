@@ -1,5 +1,6 @@
 <?php
 
+
 function scan_dir($dir, $callback, $recursive = false) {
     $files = scandir($dir);
     

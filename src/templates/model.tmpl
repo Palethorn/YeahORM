@@ -1,4 +1,9 @@
+<?php if($class_def['namespace'] != '') { ?>
+namespace <?php echo $class_def['namespace']; ?>;
+<?php } ?>
+
 class <?php echo $class_def['name']; ?> {
+
 <?php foreach($class_def['props'] as $name => $func) { ?>
     private $<?php echo $name; ?>;
 <?php } ?>

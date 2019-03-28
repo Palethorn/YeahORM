@@ -10,7 +10,9 @@ class Select {
         $or_where, 
         $order_by, 
         $offset, 
-        $limit;
+        $limit,
+        $tables,
+        $fields;
 
     public function __construct() {
         $this->select = array();
@@ -19,6 +21,8 @@ class Select {
         $this->and_where = array();
         $this->or_where = array();
         $this->order_by = array();
+        $this->tables = array();
+        $this->fields = array();
     }
 
     public function addSelect($select) {
@@ -37,6 +41,7 @@ class Select {
             'table' => $table,
             'on' => $on
         );
+
         return $this;
     }
 
@@ -132,5 +137,29 @@ class Select {
         }
 
         return \substr($frag, 0, -4);
+    }
+
+    public function getMappings() {
+
+        foreach($this->from as $table) {
+            $parts = explode(' ', $table);
+            $mapping[$parts[1]] = array('table' => $parts[0], 'fields' => array());
+        }
+
+        foreach($this->select as $select) {
+            if($select == '*') {
+                break;
+            }
+
+            $parts = explode('.', $select);
+            $mapping[$parts[0]]['fields'][] = $parts[1];
+        }
+
+        foreach($this->joins as $join) {
+            $parts = explode(' ', $join['table']);
+            $mapping[$parts[1]] = array('table' => $parts[0], 'fields' => array());
+        }
+
+        return $mapping;
     }
 }

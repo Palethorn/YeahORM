@@ -2,7 +2,5 @@
 vendor/
 composer
 composer.lock
-src/Entity/
-examples/schema
-config/
-examples/
+app/
+test_scripts/
